@@ -13,11 +13,14 @@ print ('  Width = ' + str(width))
 print ('  Height = ' + str(height))
 print ('  Codec = ' + str(codec))
 
+# create a window for the video
 title = 'Video image'
 cv2.namedWindow(title,  cv2.WINDOW_FREERATIO) # Note that window parameters have no effect on MacOS
 print('Press q to close the window.')   
 
+# start a loop
 while True:
+    # read a camera frame
     ret, frame = cap.read()
     if (ret):
         
@@ -29,6 +32,7 @@ while True:
         img[height//2:,width//2:] = cv2.flip(smaller_frame, -1) # bottom left flipped both horizontally and vertically
         img[:height//2,width//2:] = cv2.flip(smaller_frame, 1) # top right flipped vertically
 
+        # display the image
         cv2.imshow(title, img)
 
         # press q to close the window   
@@ -38,5 +42,6 @@ while True:
         print('Could not start video camera')
         break
 
+# release the video capture object and window
 cap.release()
 cv2.destroyAllWindows()

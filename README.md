@@ -29,6 +29,19 @@ The code is all developed using VS Code. You can use any IDE, but VS Code will b
 
 See https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html for further help on other systems.
 
+# Helpful ressources
+
+## Python
+You can use https://docs.python.org/3/ as a starting point and the [Library Reference](https://docs.python.org/3/library/index.html) or the [Language Reference](https://docs.python.org/3/reference/index.html) should contain all the needed information.
+
+## OpenCV reference
+See https://docs.opencv.org/4.5.3/ for the OpenCV code reference. Here, all OpenCV methods are explained. If you want to know about parameters and flags, this is the page to look them up. 
+
+## NumPy
+OpenCV uses NumPy ndarrays as the common format for data exchange. It can create, operate on, and work with NumPy arrays. For some operations it makes sense to import the NumPy module and use special functions provided by NumPy. Other libraries like TensorFlow and SciPy also use NumPy. See https://numpy.org/doc/stable/reference/index.html for the API reference.
+
+
+
 
 # Overview
 ## Tutorial #1
@@ -37,20 +50,31 @@ Load, resize and rotate an image. And display it to the screen.
 - [complete code](./GDV_tutorial_01.py)
 
 ## Tutorial #2
-Direct pixel access and manipulation.
+Direct pixel access and manipulation. Set some pixels to black, copy some part of the image to some other place, count the used colors in the image
+- [empty code](./GDV_tutorial_02_empty.py)
+- [complete code](./GDV_tutorial_02.py)
 
 ## Tutorial #3
-Show camera video and mirror it. 
+Show camera video and mirror it.
+- [empty code](./GDV_tutorial_03_empty.py)
+- [complete code](./GDV_tutorial_03.py)
 
 ## Tutorial #4
 Loading a video file and mirror it.
+- [empty code](./GDV_tutorial_04_empty.py)
+- [complete code](./GDV_tutorial_04.py)
 
 # Assignements
 ## Assignment #1 - Optical illusion
-Implement the optical illusion from http://www.psy.ritsumei.ac.jp/~akitaoka/kosaku2e.html using Python and OpenCV. Record a video of the illusion and write a short explanation (200 words).
+Implement the optical illusion from http://www.psy.ritsumei.ac.jp/~akitaoka/kosaku2e.html using Python and OpenCV. Record a video of the illusion and write a short explanation (200 words, German or English).
 ### Acceptance criteria
 - Illusion effect visible
-- From the source code, it is clearly visible that the pixel values are not changed.  
+- From the source code, it is clearly visible that the pixel values are not changed.
+### Judgement
+- Illusion is perceivable (3 points)
+- Video emphasizes the effect (2 points)
+- Code is well structured and documented (3 points)
+- Explanation is well written and helpful (2 points)
 
 ## Assignment #2 - Hybrid images
 Implement a python script that creates a hybrid image from two given images. See lecture script (tbd) and the following papers for an explanantion about hybrid images:

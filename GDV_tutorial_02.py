@@ -1,8 +1,10 @@
 import cv2
 
+# loading images in grey and color
 img_gray = cv2.imread('images/logo.png', cv2.IMREAD_GRAYSCALE)
 img_color = cv2.imread('images/logo.png', cv2.IMREAD_COLOR)
 
+# do some print out about the loaded data
 print (type(img_gray)) # prints class numpy.ndarray
 print (type(img_color)) # prints class numpy.ndarray
 
