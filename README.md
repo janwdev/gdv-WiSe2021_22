@@ -18,6 +18,7 @@ If you are not familiar with Python, check out the following tutorials:
 The code is all developed using VS Code. You can use any IDE, but VS Code will be used in the lecture.
 - Install VS Code from https://code.visualstudio.com/
 
+---
 # Installing OpenCV
 - Install opencv as pip module opencv-python as explained on https://pypi.org/project/opencv-python/ (Main modules should be enough for the beginning)
 
@@ -29,6 +30,7 @@ The code is all developed using VS Code. You can use any IDE, but VS Code will b
 
 See https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html for further help on other systems.
 
+---
 # Helpful ressources
 
 ## Python
@@ -40,10 +42,13 @@ See https://docs.opencv.org/4.5.3/ for the OpenCV code reference. Here, all Open
 ## NumPy
 OpenCV uses NumPy ndarrays as the common format for data exchange. It can create, operate on, and work with NumPy arrays. For some operations it makes sense to import the NumPy module and use special functions provided by NumPy. Other libraries like TensorFlow and SciPy also use NumPy. See https://numpy.org/doc/stable/reference/index.html for the API reference.
 
+## Other tutorials
+- [Tech with Tim: OpenCV Python Tutorials](https://www.youtube.com/watch?v=qCR2Weh64h4&list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn)
+- [freeCodeCamp.org -OpenCV Course - Full Tutorial with Python](https://www.youtube.com/watch?v=oXlwWbU8l2o) (not yet watched)
 
+---
+# Tutorials
 
-
-# Overview
 ## Tutorial #1
 Load, resize and rotate an image. And display it to the screen.
 - [empty code](./GDV_tutorial_01_empty.py)
@@ -64,32 +69,5 @@ Loading a video file and mirror it.
 - [empty code](./GDV_tutorial_04_empty.py)
 - [complete code](./GDV_tutorial_04.py)
 
-# Assignements
-## Assignment #1 - Optical illusion
-Implement the optical illusion from http://www.psy.ritsumei.ac.jp/~akitaoka/kosaku2e.html using Python and OpenCV. Record a video of the illusion and write a short explanation (200 words, German or English).
-### Acceptance criteria
-- Illusion effect visible
-- From the source code, it is clearly visible that the pixel values are not changed.
-### Judgement
-- Illusion is perceivable (3 points)
-- Video emphasizes the effect (2 points)
-- Code is well structured and documented (3 points)
-- Explanation is well written and helpful (2 points)
-
-## Assignment #2 - Hybrid images
-Implement a python script that creates a hybrid image from two given images. See lecture script (tbd) and the following papers for an explanantion about hybrid images:
-- http://olivalab.mit.edu/Papers/Oliva-HybridImages-ArtPerception2013.pdf
-- http://olivalab.mit.edu/publications/OlivaTorralb_Hybrid_Siggraph06.pdf
-Choose your own images and create a small gallery, accompanied by a descriptive text of max 200 words.
-
-## Assignment #3 - Panorama stitching
-Implement a python script that does panorama stitching. Given two overlapping photos, create a stitched and blended version of the scene. Use your own photos and describe how your program works.
-
-## Assignment #4 - Face detection
-Implement an interactive webcam application that includes some face detection algorithm. Write a clear operating manual that guides the user.
 
 
-# Sources
-## Other tutorials
-- [Tech with Tim: OpenCV Python Tutorials](https://www.youtube.com/watch?v=qCR2Weh64h4&list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn)
-- [freeCodeCamp.org -OpenCV Course - Full Tutorial with Python](https://www.youtube.com/watch?v=oXlwWbU8l2o) (not yet watched)
