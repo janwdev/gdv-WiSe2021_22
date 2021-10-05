@@ -3,9 +3,12 @@ Exercises for course "Grafische Datenverarbeitung" in winter term 2021 at HS Fur
 
 # Prerequisites
 - Install Python 3 from python.org
-  - Version 3.9.7 is recommended
-  - Test which version is installed on your machine with `python --version`
+  - Version 3.9.7 is recommended, Python 3.10 does not work (yet)
+  - Test which version is installed on your machine with `python --version` in the terminal
+    - Ensure that the correct version is used in the terminal as well as the selected interpreter: ![Screenshot with correct python interpreter selected](install/pyenv_hint.png)
 - Install pip from https://pip.pypa.io/en/stable/installation/
+  - Ensure that a version newer than 19.3 is installed
+
 
 ## Further Python ressources
 If you are not familiar with Python, check out the following tutorials:
@@ -27,6 +30,8 @@ The code is all developed using VS Code. You can use any IDE, but VS Code will b
 |py -m pip install opencv-python|python -m pip install opencv-python|python -m pip install opencv-python|
 
 ⚠ Note that there is no need to install OpenCV from opencv.org
+
+⚠ Ensure that Python 3.9.7 is used as mentioned above.
 
 See https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html for further help on other systems.
 
