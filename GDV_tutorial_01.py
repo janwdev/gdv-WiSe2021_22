@@ -14,7 +14,7 @@ newSize = (newWidth, newHeight)
 img = cv2.resize(img, newSize)
 
 # rotate image (but keep it rectangular) with 'rotate'
-img = cv2.rotate(img, cv2.cv2.ROTATE_90_CLOCKWISE)
+img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
 
 # save image with 'imwrite'
 cv2.imwrite('img_tutorial01.jpg', img)
