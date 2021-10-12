@@ -27,16 +27,16 @@ print ('height = ' + str(img.shape[0]))
 print ('width = ' + str(img.shape[1]))
 
 # resize image
-# new_width = 70
-# new_height = 50
+# new_width = 7
+# new_height = 5
 # new_size = (new_width, new_height)
 # img = cv2.resize(img, new_size)
 
- 
+# row and column access, see https://numpy.org/doc/stable/reference/arrays.ndarray.html for general access on ndarrays
 # print first row
 # print (img[0]) 
 # print first column
-# print (img[:][0])
+# print (img[:,0])
 
 # set area of the image to black
 # for i in range (30):
@@ -47,10 +47,10 @@ print ('width = ' + str(img.shape[1]))
 colors = []
 for i in range (height):
     for j in range (width):
-        curr_color = img[i][j]
+        curr_color = img[i,j]
         if colors.count(curr_color) == 0:
             colors.append(curr_color)
-print(colors)
+print('Those gray values are in the image:\n ' + str(colors))
 
 # copy one part of an image into another one
 letters = img[30:105,5:130]
