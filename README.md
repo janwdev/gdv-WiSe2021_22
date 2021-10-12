@@ -74,5 +74,9 @@ Loading a video file and mirror it.
 - [empty code](./GDV_tutorial_04_empty.py)
 - [complete code](./GDV_tutorial_04.py)
 
+## Tutorial #5
+Use the webcam image stream and draw something on it. Animate one of the drawings.
+- [empty code](./GDV_tutorial_05_empty.py)
+- [complete code](./GDV_tutorial_05.py)
 
 

@@ -1,4 +1,5 @@
 import cv2
+import copy
 
 # loading images in grey and color
 img_gray = cv2.imread('images/logo.png', cv2.IMREAD_GRAYSCALE)
@@ -15,7 +16,9 @@ print (img_color.shape) # prints the size of the image array
 # img = imgColor
 
 # Continue with the grayscale image
-img = img_gray
+# img = img_gray
+# copy the original image --> see https://docs.python.org/3/library/copy.html
+img = copy.copy(img_gray)
 
 # Extract the size or resolution of the image
 height = img.shape[0]
@@ -60,5 +63,12 @@ cv2.imwrite('img_tutorial02.jpg', img)
 title = 'OpenCV Python Tutorial'
 cv2.namedWindow(title, cv2.WINDOW_AUTOSIZE) # Note that window parameters have no effect on MacOS
 cv2.imshow(title, img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# show the original image (copy demo)
+title = 'How a copy works'
+cv2.namedWindow(title, cv2.WINDOW_AUTOSIZE) # Note that window parameters have no effect on MacOS
+cv2.imshow(title, img_gray)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

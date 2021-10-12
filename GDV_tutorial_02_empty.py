@@ -26,3 +26,5 @@ import cv2
 # save image
 
 # show the image
+
+# show the original image (copy demo)
