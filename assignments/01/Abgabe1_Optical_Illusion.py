@@ -3,6 +3,8 @@ import numpy as np
 import math
 import copy
 
+# Aufgabe https://github.com/uhahne/gdv-WiSe2021_22/blob/main/assignments/Assignement01_OpticalIllusion.md
+
 #Variablen definieren 
 width = 400 
 height = 300
@@ -30,38 +32,51 @@ imgArray = []
 
 while True:
     img = copy.copy(img_org)#Kopie des orginal Bild erstellen
-    #Bildteile auf das orginal Bild legen
+    #Bildauschnitt welcher sich bewegen soll wird auf das Bild gelegt
     img[math.ceil(height/2-partHeight/2):math.ceil(height/2 +
                   partHeight/2), position:partWidth+position] = partImg
 
     if firstRun:
-        imgArray.append(img)
-        size = (img.shape[1], img.shape[0])
+        imgArray.append(img)#die erstellte Kopie an den imgArray anhängen
+        size = (img.shape[1], img.shape[0]) #Größe des Bilds wird in der VAriable gespeichert
 
+    #Der Bildauschnitt der sich bewegen soll rückt immer um eine position nach rechts
     if right:
         position = position+1
+
+    #Der Bildauschnitt der sich bewegen soll rückt immer um eine position nach links
     else:
         position = position-1
-
+    
+    #Wenn der Ausschnitt sich am rechten Rand befindet ändert sich die VAriable um ihn dann nach links laufen zu lassen
     if position == width-partWidth-border:
         right = False
+
+    #Wenn der Ausschnitt sich am linken Rand befindet ändert sich die VAriable um ihn dann nach rechts laufen zu lassen    
     if position == border:
         right = True
+
+        #Wenn wir uns am Ende des ersten Durchlauf befinden soll ein Video aus dem Bilderarray erstellt werden
         if firstRun:
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             fps = 30
             video_filename = 'output/A1_Optical_Illusion_Video.avi'
             video = cv2.VideoWriter(video_filename, fourcc, fps, (width, height), False)
 
+            #Jedes Bild im Array wird aneinander gehängt um ein Video zu erstellen
             for i in range(len(imgArray)):
                 video.write(np.uint8(255 * imgArray[i]))
+
+            #Videodatei wird freigegeben
             video.release()
             firstRun = False
             print("Video done")
 
+    #Bildteile werden auf das Bild gelegt, diese bewegen sich nicht
     img[border:border+partHeight, width-border-partWidth:width-border] = partImg
     img[border:border+partHeight, border:border+partWidth] = partImg
     
+    #Animation wird angezeigt
     cv2.imshow(title, img)
     if cv2.waitKey(5) == ord("q"): # Programm schliessen
         break
