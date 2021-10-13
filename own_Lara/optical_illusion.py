@@ -12,15 +12,15 @@ partHeight = 40
 partWidth = 40
 border = 50
 
-#Erstellen des Farbverlaufsbild durch einen Array welches Pixel generiert von 1(Weiß) bis 0(Schwarz), width gibt an wie viele Pixel generiert werden
+#Erstellen des Farbverlaufsbild durch einen Array welches Pixel generiert von 1(Weiß) bis 0(Schwarz), width gibt an wie viele generiert werden
 img_org = np.tile(np.linspace(1, 0, width), (height, 1))
 
-#Bildteile erstellen, durch Kopieren eines Bildabschnitts des orginal Bild
+#Bildteile erstellen, durch kopieren eines Bildabschnitts im orginal Bild
 partImg = img_org[math.ceil(height/2-partHeight/2):math.ceil(height/2+partHeight/2),
                   math.ceil(width/2-partWidth/2):math.ceil(width/2+partWidth/2)]
 
 
-#Fenster erstelen und benennen
+#Fenster öffnet sich
 title = "Illusion"  # Titel zum Anzeigen (Fenster)
 cv2.namedWindow(title, cv2.WINDOW_GUI_NORMAL)
 
@@ -32,14 +32,13 @@ imgArray = []
 
 while True:
     img = copy.copy(img_org)#Kopie des orginal Bild erstellen
-
-    #Bildauschnitt welcher sich bewegt wird auf das  orginal Bild gelegt
+    #Bildauschnitt welcher sich bewegen soll wird auf das Bild gelegt
     img[math.ceil(height/2-partHeight/2):math.ceil(height/2 +
                   partHeight/2), position:partWidth+position] = partImg
 
     if firstRun:
-        imgArray.append(img)#Die erstellte Kopie des orginal Bildes wird an den imgArray anhängen
-        size = (img.shape[1], img.shape[0]) #Größe des Bilds wird in der Variable gespeichert
+        imgArray.append(img)#die erstellte Kopie an den imgArray anhängen
+        size = (img.shape[1], img.shape[0]) #Größe des Bilds wird in der VAriable gespeichert
 
     #Der Bildauschnitt der sich bewegen soll rückt immer um eine position nach rechts
     if right:
@@ -49,7 +48,7 @@ while True:
     else:
         position = position-1
     
-    #Wenn der Ausschnitt sich am rechten Rand befindet ändert sich die Variable um ihn dann nach links laufen zu lassen
+    #Wenn der Ausschnitt sich am rechten Rand befindet ändert sich die VAriable um ihn dann nach links laufen zu lassen
     if position == width-partWidth-border:
         right = False
 
