@@ -1,52 +1,74 @@
 import cv2
-import numpy as np
 import copy
 
-# load image in color and in gray
-img_color = cv2.imread('gdv_ws_21-22/img/pic.jpg',cv2.IMREAD_COLOR)
-img_gray = cv2.imread('gdv_ws_21-22/img/pic.jpg',cv2.IMREAD_GRAYSCALE)
+# loading images in grey and color
+img_gray = cv2.imread('own_Lara/img/pic.jpg', cv2.IMREAD_GRAYSCALE)
+img_color = cv2.imread('own_Lara/img/pic.jpg', cv2.IMREAD_COLOR)
 
-img = copy.copy(img_gray)#Copy erzeugt
+# do some print out about the loaded data
+print (type(img_gray)) # prints class numpy.ndarray
+print (type(img_color)) # prints class numpy.ndarray
 
-# print out some loaded data
-print(type(img))
-print(img.shape)
+print (img_gray.shape) # prints the size of the image array 
+print (img_color.shape) # prints the size of the image array
 
-# extract size and resolution of image
-width = img.shape[1]
+# Continue with the color image
+# img = imgColor
+
+# Continue with the grayscale image
+# img = img_gray
+# copy the original image --> see https://docs.python.org/3/library/copy.html
+img = copy.copy(img_gray)
+
+# Extract the size or resolution of the image
 height = img.shape[0]
+width = img.shape[1]
+print ('height = ' + str(img.shape[0]))
+print ('width = ' + str(img.shape[1]))
 
-#print first row
-print(img[0])
+# resize image
+# new_width = 7
+# new_height = 5
+# new_size = (new_width, new_height)
+# img = cv2.resize(img, new_size)
 
-#print first column
-print(img[0:height-1][0])  # : von allen Zeilen nur der erste Wert ausgeben
+# row and column access, see https://numpy.org/doc/stable/reference/arrays.ndarray.html for general access on ndarrays
+# print first row
+# print (img[0]) 
+# print first column
+# print (img[:,0])
 
-#set area of the image black
-#img=np.zeros((800,800)) schwarzes bild erzeugen, arrey mit nullen
-#for i in range (30,60,2): #startet bei 30 endet bei 60, jedes 2 pixel nur schwarz
-    #for j in range (20,40,3):
-        #img[i][j] = (0,255,0) # werte für bgr
-
-
-#find all used colors in the image#
+# set area of the image to black
+# for i in range (30):
+#     for j in range (width):
+#         img[i][j] = [0,0,0]
+        
+# find all used colors in the image
 colors = []
-for i in range (width):
-    for j in range (height):
-        current_color = img[j][i]
-        if colors.count(current_color) == 0:
-            colors.append(current_color)
-colors.sort()
-print(colors)
+for i in range (height):
+    for j in range (width):
+        curr_color = img[i,j]
+        if colors.count(curr_color) == 0:
+            colors.append(curr_color)
+print('Those gray values are in the image:\n ' + str(colors))
 
+# copy one part of an image into another one
+letters = img[30:105,5:130]
+img[115:190,150:275] = letters
 
-#copy one part of the image into another
-part = img [70:105,5:130]
-img[115:150,85:210] = part 
+# save image
+cv2.imwrite('img_tutorial02.jpg', img)
 
-#show image
-title = 'Hello OpenCV'
-cv2.namedWindow(title, cv2.WINDOW_GUI_NORMAL)
+# show the image
+title = 'OpenCV Python Tutorial'
+cv2.namedWindow(title, cv2.WINDOW_AUTOSIZE) # Note that window parameters have no effect on MacOS
+cv2.imshow(title, img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# show the original image (copy demo)
+title = 'How a copy works'
+cv2.namedWindow(title, cv2.WINDOW_AUTOSIZE) # Note that window parameters have no effect on MacOS
 cv2.imshow(title, img_gray)
-cv2.waitKey(0)  # wartet unendlich bis jemand taste drückt
+cv2.waitKey(0)
 cv2.destroyAllWindows()

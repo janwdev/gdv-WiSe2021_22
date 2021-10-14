@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread('gdv_ws_21-22/img/garden.PNG', cv2.IMREAD_COLOR)
+img = cv2.imread('own_Lara/img/garden.PNG', cv2.IMREAD_COLOR)
 print(img)
 
 # resize image with 'resize'
@@ -12,7 +12,7 @@ img = cv2.resize(img,newSize)
 #rotate image 90°
 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
 
-cv2.imwrite('gdv_ws_21-22/img_out.jpg',img)
+cv2.imwrite('own_Lara/img_out.jpg',img)
 
 title = 'Hello OpenCV'
 cv2.namedWindow(title, cv2.WINDOW_GUI_NORMAL)
