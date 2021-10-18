@@ -3,83 +3,83 @@ import numpy as np
 import math
 import copy
 
-# Aufgabe https://github.com/uhahne/gdv-WiSe2021_22/blob/main/assignments/Assignement01_OpticalIllusion.md
+# task https://github.com/uhahne/gdv-WiSe2021_22/blob/main/assignments/Assignement01_OpticalIllusion.md
 
-#Variablen definieren 
+#Define variables
 width = 400 
 height = 300
 partHeight = 40
 partWidth = 40
 border = 50
 
-#Erstellen des Farbverlaufsbild durch einen Array welches Pixel generiert von 1(Weiß) bis 0(Schwarz), width gibt an wie viele Pixel generiert werden
+#Create a picture of a gradient with an array. That array generates pixels from 0(white) to 1(black), width indicates how many pixels need to get generated
 img_org = np.tile(np.linspace(1, 0, width), (height, 1))
 
-#Bildteile erstellen, durch Kopieren eines Bildabschnitts des orginal Bild
+#unsicher
+#Create picture parts by making a copy of the original picture
 partImg = img_org[math.ceil(height/2-partHeight/2):math.ceil(height/2+partHeight/2),
                   math.ceil(width/2-partWidth/2):math.ceil(width/2+partWidth/2)]
 
-
-#Fenster erstelen und benennen
-title = "Illusion"  # Titel zum Anzeigen (Fenster)
+#Name and create window
+title = "Illusion"  #Title is shown
 cv2.namedWindow(title, cv2.WINDOW_GUI_NORMAL)
 
-#Variablen definieren für die Schleife
+#Define variables for loop
 position = border
 right = True
 firstRun = True
 imgArray = []
 
 while True:
-    img = copy.copy(img_org)#Kopie des orginal Bild erstellen
+    img = copy.copy(img_org) #Making a copy of the original picture
 
-    #Bildauschnitt welcher sich bewegt wird auf das  orginal Bild gelegt
+    #Laying the moving picture part on the background (original picture)
     img[math.ceil(height/2-partHeight/2):math.ceil(height/2 +
                   partHeight/2), position:partWidth+position] = partImg
 
     if firstRun:
-        imgArray.append(img)#Die erstellte Kopie des orginal Bildes wird an den imgArray anhängen
-        size = (img.shape[1], img.shape[0]) #Größe des Bilds wird in der Variable gespeichert
+        imgArray.append(img) #Copy of the original picture gets append to imgArray
+        size = (img.shape[1], img.shape[0]) #Size of the picture gets saved 
 
-    #Der Bildauschnitt der sich bewegen soll rückt immer um eine position nach rechts
+    #The part of the picture that’s supposed to move, moves one position to the right
     if right:
         position = position+1
 
-    #Der Bildauschnitt der sich bewegen soll rückt immer um eine position nach links
+    #The part of the picture that’s supposed to move, moves one position to the left
     else:
         position = position-1
     
-    #Wenn der Ausschnitt sich am rechten Rand befindet ändert sich die Variable um ihn dann nach links laufen zu lassen
+    #If the moving picture hits the border on the right side, the variable changes so the part moves to the left
     if position == width-partWidth-border:
         right = False
 
-    #Wenn der Ausschnitt sich am linken Rand befindet ändert sich die VAriable um ihn dann nach rechts laufen zu lassen    
+    #If the moving picture hits the border on the left side, the variable changes so the part moves to the right
     if position == border:
         right = True
 
-        #Wenn wir uns am Ende des ersten Durchlauf befinden soll ein Video aus dem Bilderarray erstellt werden
+        #At the end of the first run, a video gets created from the picture array
         if firstRun:
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             fps = 30
             video_filename = 'output/A1_Optical_Illusion_Video.avi'
             video = cv2.VideoWriter(video_filename, fourcc, fps, (width, height), False)
 
-            #Jedes Bild im Array wird aneinander gehängt um ein Video zu erstellen
+            #Each picture in the array gets append to each other to create a video
             for i in range(len(imgArray)):
                 video.write(np.uint8(255 * imgArray[i]))
 
-            #Videodatei wird freigegeben
+            #Video file gets released
             video.release()
             firstRun = False
             print("Video done")
 
-    #Bildteile werden auf das Bild gelegt, diese bewegen sich nicht
+    #Static picture parts get laid on top of the background 
     img[border:border+partHeight, width-border-partWidth:width-border] = partImg
     img[border:border+partHeight, border:border+partWidth] = partImg
     
-    #Animation wird angezeigt
+    #Animation is shown
     cv2.imshow(title, img)
-    if cv2.waitKey(5) == ord("q"): # Programm schliessen
+    if cv2.waitKey(5) == ord("q"): #Programm gets closed
         break
 
 cv2.destroyAllWindows()
