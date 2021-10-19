@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import math
 import copy
+import os
 
 # task https://github.com/uhahne/gdv-WiSe2021_22/blob/main/assignments/Assignement01_OpticalIllusion.md
 
@@ -26,8 +27,8 @@ cv2.namedWindow(title, cv2.WINDOW_GUI_NORMAL)
 
 #Define variables for loop
 position = border
-right = True
-firstRun = True
+runInRightDirection = True
+firstRunFLeftToRightABack = True
 imgArray = []
 
 while True:
@@ -37,14 +38,14 @@ while True:
     img[math.ceil(height/2-partHeight/2):math.ceil(height/2 +
                                                    partHeight/2), position:partWidth+position] = partImg
 
-    if firstRun: #Code gets changed for the first run, just important for the creation of the video
+    if firstRunFLeftToRightABack: #Code gets changed for the first run, just important for the creation of the video
         #Copy of the original picture gets append to imgArray
         imgArray.append(img)
         #Size of the picture gets saved 
         size = (img.shape[1], img.shape[0])
 
     #The part of the picture that’s supposed to move, moves one position to the right
-    if right:
+    if runInRightDirection:
         position = position+1
 
    #The part of the picture that’s supposed to move, moves one position to the left
@@ -53,17 +54,20 @@ while True:
 
     #If the moving picture hits the border on the right side, the variable changes so the part moves to the left
     if position == width-partWidth-border:
-        right = False
+        runInRightDirection = False
 
     #If the moving picture hits the border on the left side, the variable changes so the part moves to the right
     if position == border:
-        right = True
+        runInRightDirection = True
 
         #At the end of the first run, a video gets created from the picture array
-        if firstRun:
+        if firstRunFLeftToRightABack:
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             fps = 30
-            video_filename = 'output/A1_Optical_Illusion_Video.avi'
+            foldername = 'output'
+            if not os.path.exists(foldername):
+                os.makedirs(foldername)
+            video_filename = foldername + '/A1_Optical_Illusion_Video.avi'
             video = cv2.VideoWriter(
                 video_filename, fourcc, fps, (width, height), False)
 
@@ -73,7 +77,7 @@ while True:
 
             #Video file gets released
             video.release()
-            firstRun = False
+            firstRunFLeftToRightABack = False
             print("Video done")
 
     #Static picture parts get laid on top of the background 
