@@ -34,7 +34,7 @@ firstRunFLeftToRightABack = True
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 fps = 30
 foldername = 'output'
-# create outputfolder for video if doesnt already exist
+# Create outputfolder for video if doesnt already exist
 if not os.path.exists(foldername):
     os.makedirs(foldername)
 video_filename = foldername + '/A1_Optical_Illusion_Video.avi'
@@ -78,7 +78,7 @@ while True:
             firstRunFLeftToRightABack = False
             print("Video done")
 
-    #Animation is shown
+    # Animation is shown
     cv2.imshow(title, img)
     if cv2.waitKey(5) == ord("q"):  # Programm gets closed
         break
