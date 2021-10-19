@@ -1,6 +1,9 @@
 # Gruppe 1 - Lara Franke und Jannik Weisser - Optical Illusion
 ## Kurze Erklärung
 Optische Illusion, bei welcher ein Gradientenbild erzeugt wird und ein Ausschnitt aus der Mitte nach links und rechts bewegt wird und scheinbar seine Farbe ändert. In Wirklichkeit ändert sich die Farbe jedoch nicht!
+
+## Benötigte Ressourcen
+Es wurde Python 3.9.7 verwendet mit den Modulen (über pip nachinstallieren) OpenCV (Version 4.5.3) und Numpy. Diese werden beim Start importiert.
 ## Code Erklärung
 Nach dem import werden verschiedene Variablen wie die Bildgröße und die Größe des Ausschnitts, welcher bewegt werden soll, festgelegt. Diese können auch geändert werden. Allerdings findet keine Überprüfung der Werte statt, es sollten also sinnvolle Werte gewählt werden.
 
