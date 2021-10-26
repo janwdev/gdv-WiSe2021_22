@@ -79,4 +79,9 @@ Use the webcam image stream and draw something on it. Animate one of the drawing
 - [empty code](./GDV_tutorial_05_empty.py)
 - [complete code](./GDV_tutorial_05.py)
 
+## Tutorial #6
+Playing around with colors. We convert some values from RGB to HSV and then find colored objects in the image and mask them out.
+- [empty code](./GDV_tutorial_06_empty.py)
+- [complete code](./GDV_tutorial_06.py)
+
 

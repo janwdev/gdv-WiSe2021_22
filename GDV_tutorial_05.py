@@ -42,7 +42,7 @@ while True:
     # check if capture succeeded
     if (ret):
         
-        # draw a blue diagonal cross over the image
+        # draw a green diagonal cross over the image
         img = cv2.line(img, (0,0), (width, height), green, thick)
         img = cv2.line(img, (0,height), (width, 0), green, thick)
         # draw a circle
