@@ -84,4 +84,9 @@ Playing around with colors. We convert some values from RGB to HSV and then find
 - [empty code](./GDV_tutorial_06_empty.py)
 - [complete code](./GDV_tutorial_06.py)
 
+## Tutorial #7
+Counting colored objects by finding connected components in the binary image. Modify the binary image to improve the results.
+- [empty code](./GDV_tutorial_07_empty.py)
+- [complete code](./GDV_tutorial_07.py)
+
 
