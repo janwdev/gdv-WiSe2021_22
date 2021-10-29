@@ -3,7 +3,7 @@ import cv2
 import copy
 
 # print keyboard usage
-print ('This is a HSV color detectino demo. Use the keys to adjust the selection color in HSV space. Circle in bottom left.')
+print ('This is a HSV color detection demo. Use the keys to adjust the selection color in HSV space. Circle in bottom left.')
 print ('The masked image shows only the pixels with the given HSV color within a given range.')
 print ('Use h/H to de-/increase the hue.')
 print ('Use s/S to de-/increase the saturation.')
@@ -82,10 +82,10 @@ while True:
         HSV_blue_img = np.zeros((1,1,3), np.uint8)
         HSV_blue_img[0,0] = (hue, saturation, value)
         medium_blue_array = cv2.cvtColor(HSV_blue_img, cv2.COLOR_HSV2BGR)[0,0]
-        RGB_blue = (int(medium_blue_array[0]),int(medium_blue_array[1]),int(medium_blue_array[2]))
+        blue_BGR = (int(medium_blue_array[0]),int(medium_blue_array[1]),int(medium_blue_array[2]))
 
         # draw selection color circle
-        img = cv2.circle(img, (width - 50, height - 50), 30, RGB_blue, -1)
+        img = cv2.circle(img, (width - 50, height - 50), 30, blue_BGR, -1)
         img = cv2.putText(img,'H = ' + str(hue), (width - 200, height - 75), font, font_size_smaller, blue, thinner)
         img = cv2.putText(img,'S = ' + str(saturation), (width - 200, height - 50), font, font_size_smaller, blue, thinner)
         img = cv2.putText(img,'V = ' + str(value), (width - 200, height - 25), font, font_size_smaller, blue, thinner)
@@ -104,7 +104,7 @@ while True:
         # show the masked image in another window
         cv2.imshow('Masked image', result)
         # show the mask image in another window
-        #cv2.imshow('Mask image', mask)
+        cv2.imshow('Mask image', mask)
 
         # deal with keyboard input
         key = cv2.waitKey(10)
