@@ -3,7 +3,7 @@ import cv2
 import copy
 
 # print keyboard usage
-print ('This is a HSV color detectino demo. Use the keys to adjust the selection color in HSV space. Circle in bottom left.')
+print ('This is a HSV color detection demo. Use the keys to adjust the selection color in HSV space. Circle in bottom left.')
 print ('The masked image shows only the pixels with the given HSV color within a given range.')
 print ('Use h/H to de-/increase the hue.')
 print ('Use s/S to de-/increase the saturation.')
