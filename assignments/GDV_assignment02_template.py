@@ -1,3 +1,11 @@
+'''
+Assignement 02: Object counting
+Group: <Your group>
+Names: <Your names>
+Date: <Date of last changes>
+Sources: <Sources of inspiration and collaboration (persons, videos, web pages, documents, books, ...)>
+'''
+
 import cv2
 import glob # for loading all images from a directory
 
