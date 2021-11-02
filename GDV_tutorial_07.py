@@ -34,40 +34,50 @@ def morph_shape(val):
 
 # dilation with parameters
 def dilatation(img,size,shape): 
-    element = cv2.getStructuringElement(shape, (2 * size + 1, 2 * size + 1),
+    kernel = cv2.getStructuringElement(shape, (2 * size + 1, 2 * size + 1),
                                        (size, size))
-    return cv2.dilate(img, element)
+    return cv2.dilate(img, kernel)
 
-# opening
+# erosion with parameters
+def erosion(img,size,shape): 
+    kernel = cv2.getStructuringElement(shape, (2 * size + 1, 2 * size + 1),
+                                       (size, size))
+    return cv2.erode(img, kernel)
+
+# opening with parameters
 def opening(img,size,shape): 
-    element = cv2.getStructuringElement(shape, (2 * size + 1, 2 * size + 1),
+    kernel = cv2.getStructuringElement(shape, (2 * size + 1, 2 * size + 1),
                                        (size, size))
-    return cv2.morphologyEx(img, cv2.MORPH_OPEN, element)
+    return cv2.morphologyEx(img,cv2.MORPH_OPEN, kernel)
 
-#setting the parameters
+# closing with parameters
+def closing(img,size,shape): 
+    kernel = cv2.getStructuringElement(shape, (2 * size + 1, 2 * size + 1),
+                                       (size, size))
+    return cv2.morphologyEx(img,cv2.MORPH_CLOSE, kernel)
+
+# debug mask images to illustrate morphological operations
+#cv2.imshow('Mask image',mask)
+#cv2.waitKey(0)
+
+# morphological operations (see https://docs.opencv.org/master/db/df6/tutorial_erosion_dilatation.html)
+kernel_size = 3
 kernel_shape = morph_shape(2)
-kernel_size = 7
-#mask = dilatation(mask,kernel_size,kernel_shape)
-mask = opening(mask,kernel_size,kernel_shape)
-
-# mask out green parts as binary image
-result = cv2.bitwise_and(img, img, mask=mask)
+mask = opening(mask,kernel_size, kernel_shape)
+mask = closing(mask,kernel_size, kernel_shape)
+ 
 
 # find connected components
-connectivity = 4
-(numLabels, labels, stats, centroids) = cv2.connectedComponentsWithStats(mask, connectivity, cv2.CV_32S)
-
-
-# print out number of connected components and be aware that The first connected component, with an ID of 0
-# is always the background. We typically ignore the background, but if you ever need it, keep in mind that ID 0
-# contains it.
-print('We have found ', str(numLabels-1),' green smarties.')
+connectivity = 8
+(numLabels, labels, stats, centroids) = cv2.connectedComponentsWithStats(mask,connectivity,cv2.CV_32S)
 
 # find center of mass and draw a mark in the original image
 red_BGR = (0,0,255)
+green_BGR = (0,255,0)
 circle_size = 10
 circle_thickness = 5
 min_size = 10
+numRejected = 1
 
 # go through all (reasonable) found connected components
 for i in range(1,numLabels):
@@ -78,33 +88,37 @@ for i in range(1,numLabels):
     h = stats[i, cv2.CC_STAT_HEIGHT]
     if w < min_size or h < min_size:
         print ('Found a too small component.')
-        break # found component is too small to be correct 
+        numRejected += 1
+        continue # found component is too small to be correct 
     if w > h:
         roundness = 1.0 / (w/h)
     elif h > w:
         roundness = 1.0 / (h/w)  
-    if (roundness > 2):
+    if (roundness < .9):
         print ('Found a component that is not round enough.')
-        break # ratio of width and height is not suitable
+        numRejected += 1
+        continue # ratio of width and height is not suitable
 
     # find and draw center
     center = centroids[i]
     center = np.round(center)
     center = center.astype(int)
     cv2.circle(img,center,circle_size,red_BGR,circle_thickness)
+
     # find and draw bounding box
-    
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 3) 
+    cv2.rectangle(img, (x, y), (x + w, y + h), green_BGR, 3) 
 
-
+# print out number of connected components
+print('We have found',str(numLabels-numRejected),'green smarties.')
 
 
 # show the original image with drawings in one window
 cv2.imshow('Original image', img)
 # show the masked image in another window
-cv2.imshow('Masked image', result)
+
 # show the mask image in another window
-cv2.imshow('Mask image', mask)
+cv2.imshow('Mask image',mask)
+cv2.imwrite('mask.jpg',mask)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

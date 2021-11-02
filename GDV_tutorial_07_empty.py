@@ -22,26 +22,22 @@ hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # create a mask
 mask = cv2.inRange(hsv, lower_green, upper_green)
 
-# mask out green parts as binary image
+## morphological operations code
 
 # find connected components
 
-
-# print out number of connected components
-print('We have found x green smarties.')
-
 # find center of mass and draw a mark in the original image
-
 
 # go through all (reasonable) found connected components
 
     # check size and roundness as plausibility
-   
+    
     # find and draw center
     
     # find and draw bounding box
-
-
+    
+# print out number of connected components
+print('We have found x green smarties.')
 
 
 # show the original image with drawings in one window
@@ -49,7 +45,8 @@ cv2.imshow('Original image', img)
 # show the masked image in another window
 
 # show the mask image in another window
-
+cv2.imshow('Mask image',mask)
+#cv2.imwrite('mask.jpg',mask)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
