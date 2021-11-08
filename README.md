@@ -89,4 +89,16 @@ Counting colored objects by finding connected components in the binary image. Mo
 - [empty code](./GDV_tutorial_07_empty.py)
 - [complete code](./GDV_tutorial_07.py)
 
+## Tutorial #8
+Demonstrating how to do template matching in OpenCV. 
+- [empty code](./GDV_tutorial_08_empty.py)
+- [complete code](./GDV_tutorial_08.py)
+
+## Tutorial #9
+Demonstrating Gaussian blur filter with OpenCV. 
+- [empty code](./GDV_tutorial_09_empty.py)
+- [complete code](./GDV_tutorial_09.py)
+- [complete code with 3D plot of the kernel using matplotlib](./GDV_tutorial_09_3Dplot.py)
+
+Note that matplotlib needs to be installed as described [here](https://matplotlib.org/stable/users/installing.html)
 
