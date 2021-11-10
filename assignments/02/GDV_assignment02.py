@@ -26,7 +26,7 @@ hue_range = 5
 saturation_range = 50
 value_range = 50
 
-# Values are RGB
+# setting colour Values in RGB for the different bubble gum colours
 hue_red = 179
 saturation_red = 168
 value_red = 173
@@ -118,16 +118,18 @@ def closing(img, size, shape):
 num_colors = 6
 color_names = ['red', 'green', 'blue', 'yellow', 'white', 'pink']
 
+# define counters 
 num_labels = 0
 num_rejected = 1
 
+#define kernelsize
 kernel_size = 3
 kernel_shape = morph_shape(2)
 connectivity = 8
 
 min_size = 10
 
-
+# method to count one colour of the bubble gum 
 def color_counter(img, height, width, c):
     global num_rejected
     global num_labels
@@ -138,6 +140,7 @@ def color_counter(img, height, width, c):
     result = cv2.bitwise_and(img, img, mask=mask)
     cv2.imshow('Masked image', result)
 
+    # define paramters for the different colours 
     if c == 0:  # red
         mask = opening(mask, kernel_size-1, kernel_shape)
         mask = dilatation(mask, kernel_size+1, kernel_shape)
