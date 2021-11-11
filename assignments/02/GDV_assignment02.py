@@ -5,7 +5,7 @@ Names: Lara Franke, Jannik Weisser
 Date: 04.11.2021
 Sources: <Sources of inspiration and collaboration (persons, videos, web pages, documents, books, ...)>
 '''
-
+# imports 
 import cv2
 import glob  # for loading all images from a directory
 
@@ -26,7 +26,8 @@ hue_range = 5
 saturation_range = 50
 value_range = 50
 
-# setting colour Values in RGB for the different bubble gum colours
+# setting colour values in RGB for the different bubble gum colours
+#red
 hue_red = 179
 saturation_red = 168
 value_red = 173
@@ -34,7 +35,7 @@ lower_bound_red = (hue_red-hue_range, saturation_red -
                    saturation_range, value_red-value_range)
 upper_bound_red = (hue_red+hue_range, saturation_red +
                    saturation_range, value_red+value_range)
-
+#green
 hue_green = 46
 saturation_green = 181
 value_green = 168
@@ -42,7 +43,7 @@ lower_bound_green = (hue_green-hue_range, saturation_green -
                      saturation_range, value_green-value_range)
 upper_bound_green = (hue_green+hue_range, saturation_green +
                      saturation_range, value_green+value_range)
-
+#blue
 hue_blue = 99
 saturation_blue = 233
 value_blue = 171
@@ -50,7 +51,7 @@ lower_bound_blue = (hue_blue-hue_range, saturation_blue -
                     saturation_range, value_blue-value_range)
 upper_bound_blue = (hue_blue+hue_range, saturation_blue +
                     saturation_range, value_blue+value_range)
-
+#yellow
 hue_yellow = 28
 saturation_yellow = 207
 value_yellow = 255
@@ -58,7 +59,7 @@ lower_bound_yellow = (hue_yellow-hue_range, saturation_yellow -
                       saturation_range, value_yellow-value_range)
 upper_bound_yellow = (hue_yellow+hue_range, saturation_yellow +
                       saturation_range, value_yellow+value_range)
-
+#white
 hue_white = 29
 saturation_white = 31
 value_white = 255
@@ -66,7 +67,7 @@ lower_bound_white = (hue_white-hue_range, saturation_white -
                      saturation_range, value_white-value_range)
 upper_bound_white = (hue_white+hue_range, saturation_white +
                      saturation_range, value_white+value_range)
-
+#pink
 hue_pink = 7
 saturation_pink = 110
 value_pink = 250
@@ -75,9 +76,10 @@ lower_bound_pink = (hue_pink-hue_range, saturation_pink -
 upper_bound_pink = (hue_pink+hue_range, saturation_pink +
                     saturation_range, value_pink+value_range)
 
-
+# array with the lower bound of each colour
 color_lower_bound = [lower_bound_red, lower_bound_green, lower_bound_blue,
                      lower_bound_yellow, lower_bound_white, lower_bound_pink]
+# arrays with the higher bound of each colour
 color_upper_bound = [upper_bound_red, upper_bound_green, upper_bound_blue,
                      upper_bound_yellow, upper_bound_white, upper_bound_pink]
 
@@ -114,7 +116,7 @@ def closing(img, size, shape):
                                         (size, size))
     return cv2.morphologyEx(img, cv2.MORPH_CLOSE, element)
 
-
+# define over all number of colours and an array of the colour names 
 num_colors = 6
 color_names = ['red', 'green', 'blue', 'yellow', 'white', 'pink']
 
@@ -122,18 +124,21 @@ color_names = ['red', 'green', 'blue', 'yellow', 'white', 'pink']
 num_labels = 0
 num_rejected = 1
 
-#define kernelsize
+# define kernelsize
 kernel_size = 3
 kernel_shape = morph_shape(2)
 connectivity = 8
 
+# define when the size of gum gets to small 
 min_size = 10
 
 # method to count one colour of the bubble gum 
 def color_counter(img, height, width, c):
     global num_rejected
     global num_labels
+    # reseting the rejects to 1 because of the background always gets counted 
     num_rejected = 1
+    # bgr image to hsv 
     hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv_img, color_lower_bound[c], color_upper_bound[c])
     cv2.imshow('Original image', img)
@@ -147,7 +152,7 @@ def color_counter(img, height, width, c):
         mask = closing(mask, kernel_size, kernel_shape)
     if c == 3:  # yellow
         mask = opening(mask, kernel_size-1, kernel_shape)
-    else:
+    else: # all the other colours 
         mask = opening(mask, kernel_size, kernel_shape)
         mask = closing(mask, kernel_size, kernel_shape)
 
@@ -158,6 +163,7 @@ def color_counter(img, height, width, c):
         y = stats[i, cv2.CC_STAT_TOP]
         w = stats[i, cv2.CC_STAT_WIDTH]
         h = stats[i, cv2.CC_STAT_HEIGHT]
+        # checking for to small components 
         if w < min_size or h < min_size:
             print('Found a too small component.')
             num_rejected += 1
@@ -183,14 +189,17 @@ for img_name in glob.glob('images/chewing_gum_balls*.jpg'):
 
         success = (num_final_labels == int(gt_list[c]))
 
+        # output if the correct quantity of gums got counted  
         if success:
             print('We have found all', str(num_final_labels), '/',
                   str(gt_list[c]), color_names[c], 'chewing gum balls. Yeah!')
             foo = 0
+        # output if to many gums got counted
         elif (num_final_labels > int(gt_list[c])):
             print('We have found too many (', str(num_final_labels), '/',
                   str(gt_list[c]), ') candidates for', color_names[c], 'chewing gum balls. Damn!')
             all_colors_correct = False
+        # output if to little gums got counted
         else:
             print('We have not found enough (', str(num_final_labels), '/',
                   str(gt_list[c]), ') candidates for', color_names[c], 'chewing gum balls. Damn!')
@@ -204,6 +213,7 @@ for img_name in glob.glob('images/chewing_gum_balls*.jpg'):
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
+    # counting in how many pictures all colours got counted correctly 
     if all_colors_correct:
         num_test_images_succeeded += 1
         print('Yeah, all colored objects have been found correctly in ', img_name)
