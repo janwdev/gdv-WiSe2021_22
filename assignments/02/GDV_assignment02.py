@@ -26,7 +26,7 @@ hue_range = 5
 saturation_range = 50
 value_range = 50
 
-# setting colour values in RGB for the different bubble gum colours
+# setting colour values in RGB for the different bubble gum color
 #red
 hue_red = 179
 saturation_red = 168
@@ -83,7 +83,7 @@ color_lower_bound = [lower_bound_red, lower_bound_green, lower_bound_blue,
 color_upper_bound = [upper_bound_red, upper_bound_green, upper_bound_blue,
                      upper_bound_yellow, upper_bound_white, upper_bound_pink]
 
-
+# sets morph shape
 def morph_shape(val):
     if val == 0:
         return cv2.MORPH_RECT
@@ -116,7 +116,7 @@ def closing(img, size, shape):
                                         (size, size))
     return cv2.morphologyEx(img, cv2.MORPH_CLOSE, element)
 
-# define over all number of colours and an array of the colour names 
+# define over all number of color and an array of the colour names
 num_colors = 6
 color_names = ['red', 'green', 'blue', 'yellow', 'white', 'pink']
 
@@ -129,64 +129,62 @@ kernel_size = 3
 kernel_shape = morph_shape(2)
 connectivity = 8
 
-# define when the size of gum gets to small 
+# define when the size of gum gets to small
 min_size = 10
+
+# define mask
+mask = None
 
 # method to count one colour of the bubble gum 
 def color_counter(img, height, width, c):
+    # use global variables inside of the method
     global num_rejected
     global num_labels
+    global mask
     # reseting the rejects to 1 because of the background always gets counted 
     num_rejected = 1
     # bgr image to hsv 
     hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    # create a mask
     mask = cv2.inRange(hsv_img, color_lower_bound[c], color_upper_bound[c])
-    cv2.imshow('Original image', img)
-    result = cv2.bitwise_and(img, img, mask=mask)
-    cv2.imshow('Masked image', result)
-
-    # define paramters for the different colours 
+    
+    # change mask for different color 
     if c == 0:  # red
         mask = opening(mask, kernel_size-1, kernel_shape)
         mask = dilatation(mask, kernel_size+1, kernel_shape)
         mask = closing(mask, kernel_size, kernel_shape)
     if c == 3:  # yellow
         mask = opening(mask, kernel_size-1, kernel_shape)
-    else: # all the other colours 
+    else: # all the other color 
         mask = opening(mask, kernel_size, kernel_shape)
         mask = closing(mask, kernel_size, kernel_shape)
 
+    # Check for too small components
     (num_labels, labels, stats, centroids) = cv2.connectedComponentsWithStats(
         mask, connectivity, cv2.CV_32S)
     for i in range(1, num_labels):
-        x = stats[i, cv2.CC_STAT_LEFT]
-        y = stats[i, cv2.CC_STAT_TOP]
         w = stats[i, cv2.CC_STAT_WIDTH]
         h = stats[i, cv2.CC_STAT_HEIGHT]
-        # checking for to small components 
         if w < min_size or h < min_size:
             print('Found a too small component.')
             num_rejected += 1
             continue  # found component is too small to be correct
 
-    result = cv2.bitwise_and(img, img, mask=mask)
-    cv2.imshow('Masked image later', result)
-
-
+# check how many testimages completed successfully
 num_test_images_succeeded = 0
+# loop through all images
 for img_name in glob.glob('images/chewing_gum_balls*.jpg'):
-    # load image
     print('Searching for colored balls in image:', img_name)
     all_colors_correct = True
+    # loop through all color
     for c in range(0, num_colors):
         img = cv2.imread(img_name, cv2.IMREAD_COLOR)
         height = img.shape[0]
         width = img.shape[1]
-
+        # call own function
         color_counter(img, height, width, c)
-
+        # check if number of found elements is correct
         num_final_labels = num_labels-num_rejected
-
         success = (num_final_labels == int(gt_list[c]))
 
         # output if the correct quantity of gums got counted  
@@ -194,12 +192,12 @@ for img_name in glob.glob('images/chewing_gum_balls*.jpg'):
             print('We have found all', str(num_final_labels), '/',
                   str(gt_list[c]), color_names[c], 'chewing gum balls. Yeah!')
             foo = 0
-        # output if to many gums got counted
+        # output if too many gums got counted
         elif (num_final_labels > int(gt_list[c])):
             print('We have found too many (', str(num_final_labels), '/',
                   str(gt_list[c]), ') candidates for', color_names[c], 'chewing gum balls. Damn!')
             all_colors_correct = False
-        # output if to little gums got counted
+        # output if too little gums got counted
         else:
             print('We have not found enough (', str(num_final_labels), '/',
                   str(gt_list[c]), ') candidates for', color_names[c], 'chewing gum balls. Damn!')
@@ -209,11 +207,15 @@ for img_name in glob.glob('images/chewing_gum_balls*.jpg'):
         if ((img_name == 'images\chewing_gum_balls01.jpg')
             or (img_name == 'images\chewing_gum_balls04.jpg')
                 or (img_name == 'images\chewing_gum_balls06.jpg')):
+            # show images
+            cv2.imshow('Original image', img)
+            result = cv2.bitwise_and(img, img, mask=mask)
+            cv2.imshow('Masked image', result)
 
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
-    # counting in how many pictures all colours got counted correctly 
+    # counting in how many pictures all color got counted correctly
     if all_colors_correct:
         num_test_images_succeeded += 1
         print('Yeah, all colored objects have been found correctly in ', img_name)
