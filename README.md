@@ -99,6 +99,10 @@ Demonstrating Gaussian blur filter with OpenCV.
 - [empty code](./GDV_tutorial_09_empty.py)
 - [complete code](./GDV_tutorial_09.py)
 - [complete code with 3D plot of the kernel using matplotlib](./GDV_tutorial_09_3Dplot.py)
+  - Note that matplotlib needs to be installed as described [here](https://matplotlib.org/stable/users/installing.html)
 
-Note that matplotlib needs to be installed as described [here](https://matplotlib.org/stable/users/installing.html)
+## Tutorial #10
+Doing the Fourier Transform for images and back.
+- [empty code](./GDV_tutorial_10_empty.py)
+- [complete code](./GDV_tutorial_10.py)
 
