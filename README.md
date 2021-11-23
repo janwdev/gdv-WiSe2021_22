@@ -106,3 +106,18 @@ Doing the Fourier Transform for images and back.
 - [empty code](./GDV_tutorial_10_empty.py)
 - [complete code](./GDV_tutorial_10.py)
 
+## Tutorial #11
+Geometric transformations a.k.a. image warping.
+- [empty code](./GDV_tutorial_11_empty.py)
+- [complete code](./GDV_tutorial_11.py)
+
+## Tutorial #12
+Select three points in two images and compute the appropriate affine transformation.
+- [empty code](./GDV_tutorial_12_empty.py)
+- [complete code](./GDV_tutorial_12.py)
+
+## Tutorial #13
+Select four points in two images and compute the appropriate projective/perspective transformation.
+- [empty code](./GDV_tutorial_13_empty.py)
+- [complete code](./GDV_tutorial_13.py)
+
