@@ -3,7 +3,12 @@ Assignement 03: Hybrid Imaging
 Group: Gruppe 1
 Names: Lara Franke, Jannik Weisser
 Date: 24.11.2021
-Sources: <Sources of inspiration and collaboration (persons, videos, web pages, documents, books, ...)>
+Sources:
+https://yxw.cs.illinois.edu/course/CS445/F21/projects/hybrid/ComputationalPhotography_ProjectHybrid.html
+https://docs.opencv.org/4.5.4/de/dbc/tutorial_py_fourier_transform.html
+https://www.tutorialkart.com/opencv/python/opencv-python-gaussian-image-smoothing/
+https://stackoverflow.com/questions/50508452/implementing-photoshop-high-pass-filter-hpf-in-opencv
+https://www.kellyyangfan.com/hybridimage
 '''
 # imports 
 import cv2
@@ -42,7 +47,7 @@ def clickScr2(event, x, y, flags, param):
 
 def createLowAndHighFrequencyImg(imgLow, imgHigh, ksize):
     lowFrequencyImg = cv2.GaussianBlur(imgLow,ksize,cv2.BORDER_DEFAULT)
-    highFrequencyimg = imgHigh - cv2.GaussianBlur(imgHigh,ksize,cv2.BORDER_DEFAULT)
+    highFrequencyimg = cv2.subtract(imgHigh,cv2.GaussianBlur(imgHigh,ksize,sigmaX=0,borderType=cv2.BORDER_DEFAULT))
     return lowFrequencyImg, highFrequencyimg
 
 def getFrequencies(image):
