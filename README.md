@@ -47,6 +47,9 @@ See https://docs.opencv.org/4.5.3/ for the OpenCV code reference. Here, all Open
 ## NumPy
 OpenCV uses NumPy ndarrays as the common format for data exchange. It can create, operate on, and work with NumPy arrays. For some operations it makes sense to import the NumPy module and use special functions provided by NumPy. Other libraries like TensorFlow and SciPy also use NumPy. See https://numpy.org/doc/stable/reference/index.html for the API reference.
 
+## Python style guide
+All these tutorials are written according to the [PEP8 Python Code Style Guide](https://www.python.org/dev/peps/pep-0008/). This is realized using the Python tools [pycodestyle (pep8)](https://code.visualstudio.com/docs/python/linting#_pycodestyle-pep8) and [autopep8](https://pypi.org/project/autopep8/).
+
 ## Other tutorials
 - [Tech with Tim: OpenCV Python Tutorials](https://www.youtube.com/watch?v=qCR2Weh64h4&list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn)
 - [freeCodeCamp.org -OpenCV Course - Full Tutorial with Python](https://www.youtube.com/watch?v=oXlwWbU8l2o) (not yet watched)
@@ -120,4 +123,15 @@ Select three points in two images and compute the appropriate affine transformat
 Select four points in two images and compute the appropriate projective/perspective transformation.
 - [empty code](./GDV_tutorial_13_empty.py)
 - [complete code](./GDV_tutorial_13.py)
+
+## Tutorial #14
+Compute the edges of an image with the Canny edge detection. Adjust the parameters using sliders.
+- [empty code](./GDV_tutorial_14_empty.py)
+- [complete code](./GDV_tutorial_14.py)
+
+## Tutorial #15
+Compute the features of an image with the Harris corner detection. Adjust the parameters using sliders.
+- [empty code](./GDV_tutorial_15_empty.py)
+- [complete code](./GDV_tutorial_15.py)
+
 

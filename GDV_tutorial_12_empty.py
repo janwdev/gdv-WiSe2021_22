@@ -1,30 +1,32 @@
 # Inspired by https://www.pyimagesearch.com/2015/03/09/capturing-mouse-click-events-with-python-and-opencv/
 import numpy as np
 import cv2
+from numpy.lib.shape_base import take_along_axis
 
 # define arrays for the clicked points
+refPtSrc = []
+refPtDst = []
 
 # define one callback functions for each image window
 def clickSrc(event, x, y, flags, param):
     # grab references to the global variables
-    
+    global refPtSrc
     # if the left mouse button was clicked, add the point to the source array
     if event == cv2.EVENT_LBUTTONDOWN:
-        
+        refPtSrc += [(x,y)]
         # draw a circle around the clicked point
-        
+        cv2.circle(img,(x,y),4,(255,0,0),2)
         # redraw the image
         cv2.imshow('Original',img)
 
 def clickDst(event, x, y, flags, param):
     # grab references to the global variables
-    
-    # if the left mouse button was clicked, add the point to the destination array
+    global refPtDst
+    # if the left mouse button was clicked, add the point to the source array
     if event == cv2.EVENT_LBUTTONDOWN:
-        
+        refPtDst += [(x,y)]
         # draw a circle around the clicked point
-        
-         # redraw the image
+        cv2.circle(dst_transform,(x,y),4,(255,0,0),2)
         cv2.imshow('Transformed image',dst_transform)
 
 # Load image and resize for better display
@@ -42,10 +44,17 @@ cv2.setMouseCallback('Transformed image', clickDst)
 
 
 # keep looping until the 'q' key is pressed
-
+computationDone = False
 while True:
     # if there are three reference points, then compute the transform and apply the transformation
-    
+    if not(computationDone):
+        if (len(refPtSrc) == 3) and (len(refPtDst) == 3):
+            # do computation
+            print(refPtSrc)
+            T_affine = cv2.getAffineTransform(np.float32(refPtSrc),np.float32(refPtDst))
+            print('\Affine transformation\n','\n'.join(['\t'.join(['%03.3f' % cell for cell in row]) for row in T_affine]))
+            dst_transform = cv2.warpAffine(img,T_affine,(rows,cols))
+            computationDone = True
     
     # display the image and wait for a keypress
     cv2.imshow('Original', img)
@@ -58,6 +67,7 @@ while True:
         img = clone.copy()
         refPtSrc = []
         refPtDst = []
+        computationDone = False
         
     # if the 'q' key is pressed, break from the loop
     elif key == ord("q"):

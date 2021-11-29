@@ -9,14 +9,12 @@ import cv2
 
 # start a loop
 
-    # read one video frame
-          
-        # create four tiles of the image
-        
+# read one video frame
 
-        # show the image
-       
+# create four tiles of the image
 
-        # close the window and stop the loop if 'q' is pressed
-       
+# show the image
+
+# close the window and stop the loop if 'q' is pressed
+
 # release the video and close all windows
