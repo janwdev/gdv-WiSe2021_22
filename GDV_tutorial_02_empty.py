@@ -12,13 +12,12 @@ import cv2
 
 # resize image
 
- 
 # print first row
 
 # print first column
 
 # set area of the image to black
-        
+
 # find all used colors in the image
 
 # copy one part of an image into another one

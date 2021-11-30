@@ -9,32 +9,32 @@ import operator
 
 
 # drawing helper variables
-## thickness
+# thickness
 
-## color
+# color
 
-## fonts
+# fonts
 
 # variables for moving rectangle
 
 # start a loop
 
-    # capture the image
+# capture the image
 
-    # check if capture succeeded
-        
-        # draw a blue diagonal cross over the image
+# check if capture succeeded
 
-        # draw a circle
+# draw a blue diagonal cross over the image
 
-        # write some text
+# draw a circle
 
-        # draw arrows (potential assignment)
+# write some text
 
-        # draw a rectangle that moves on a circular path
-        
-        # display the image
-        
-        # press q to close the window
+# draw arrows (potential assignment)
+
+# draw a rectangle that moves on a circular path
+
+# display the image
+
+# press q to close the window
 
 # release the video capture object and window

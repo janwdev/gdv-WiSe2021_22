@@ -8,18 +8,17 @@ import cv2
 
 
 # create a window for the video
- 
+
 
 # start a loop
 
-    # read a camera frame
-    
-    # create four flipped tiles of the image
-    
+# read a camera frame
 
-    # display the image
-    
-    # press q to close the window   
-        
+# create four flipped tiles of the image
+
+# display the image
+
+# press q to close the window
+
 
 # release the video capture object and window
