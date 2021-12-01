@@ -78,6 +78,26 @@ def getFrequencies(image):
     return spec, mag, phase
 
 
+def sliderCallBack(x):
+    '''callback function for the sliders'''
+    global computationDone
+    global ksize_imghigh
+    global ksize_imglow
+    
+    # read slider positions
+    position_high = cv2.getTrackbarPos("ksize_high_freq", 'hybrid')
+    position_low = cv2.getTrackbarPos("ksize_low_freq", 'hybrid')
+
+    if(position_high % 2 != 1):
+        position_high += 1
+    if(position_low % 2 != 1):
+        position_low += 1
+    
+    ksize_imghigh = position_high
+    ksize_imglow = position_low
+    computationDone = False
+
+
 # Load image and resize for better display
 img = cv2.imread('images/DerekPicture.jpg', cv2.IMREAD_GRAYSCALE)
 img = cv2.resize(img, (400, 400), interpolation=cv2.INTER_CUBIC)
@@ -89,12 +109,21 @@ img2 = cv2.resize(img2, (400, 400), interpolation=cv2.INTER_CUBIC)
 rows, cols = img2.shape
 resetImg2 = img2.copy()
 resetImg1 = img.copy()
+
+hybridImg = np.zeros(img.shape, np.uint8)
+cv2.imshow('hybrid', hybridImg)
+
 warpedSecondImg = np.zeros(img2.shape, np.uint8)
 cv2.imshow('Original1', img)
 cv2.setMouseCallback('Original1', clickSrc1)
 cv2.imshow('Original2', img2)
 cv2.setMouseCallback('Original2', clickScr2)
 
+scaleFactor = 100
+slider_ksize_high = cv2.createTrackbar(
+    "ksize_high_freq", 'hybrid', ksize_imghigh, scaleFactor, sliderCallBack)
+slider_ksize_low = cv2.createTrackbar(
+    "ksize_low_freq", 'hybrid', ksize_imglow, scaleFactor, sliderCallBack)
 
 # keep looping until the 'q' key is pressed
 computationDone = False
