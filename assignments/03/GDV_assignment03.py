@@ -14,11 +14,23 @@ https://www.kellyyangfan.com/hybridimage
 import cv2
 import numpy as np
 
+img1Name = 'images/happy.jpg'
+img2Name = 'images/sad.jpg'
+imgResizeSize = (400, 400)
+
 refPtSrc1 = []
 refPtSrc2 = []
 
 ksize_imglow = 21
 ksize_imghigh = 31
+
+titleOrig1 = "Original1"
+titleOrig2 = "Original2"
+titleHybrid = "hybrid"
+titleWarped = "Warped2Img"
+titleHighFreq = "high"
+dragbarnamehigh = "ksize_high_freq"
+dragbarnamelow = "ksize_low_freq"
 
 
 def clickSrc1(event, x, y, flags, param):
@@ -33,7 +45,7 @@ def clickSrc1(event, x, y, flags, param):
             refPtSrc1.append((x, y))
         # draw a circle around the clicked point
         cv2.circle(img, refPtSrc1[pos], 4, (0, 255, 0), 2)
-        cv2.imshow('Original1', img)
+        cv2.imshow(titleOrig1, img)
 
 
 def clickScr2(event, x, y, flags, param):
@@ -48,7 +60,7 @@ def clickScr2(event, x, y, flags, param):
             refPtSrc2.append((x, y))
         # draw a circle around the clicked point
         cv2.circle(img2, refPtSrc2[pos], 4, (0, 255, 0), 2)
-        cv2.imshow('Original2', img2)
+        cv2.imshow(titleOrig2, img2)
 
 
 def createLowAndHighFrequencyImg(imgLow, imgHigh, ksizelow, ksizehigh):
@@ -83,27 +95,27 @@ def sliderCallBack(x):
     global computationDone
     global ksize_imghigh
     global ksize_imglow
-    
+
     # read slider positions
-    position_high = cv2.getTrackbarPos("ksize_high_freq", 'hybrid')
-    position_low = cv2.getTrackbarPos("ksize_low_freq", 'hybrid')
+    position_high = cv2.getTrackbarPos(dragbarnamehigh, titleHybrid)
+    position_low = cv2.getTrackbarPos(dragbarnamelow, titleHybrid)
 
     if(position_high % 2 != 1):
         position_high += 1
     if(position_low % 2 != 1):
         position_low += 1
-    
+
     ksize_imghigh = position_high
     ksize_imglow = position_low
     computationDone = False
 
 
 # Load image and resize for better display
-img = cv2.imread('images/DerekPicture.jpg', cv2.IMREAD_GRAYSCALE)
-img = cv2.resize(img, (400, 400), interpolation=cv2.INTER_CUBIC)
+img = cv2.imread(img1Name, cv2.IMREAD_GRAYSCALE)
+img = cv2.resize(img, imgResizeSize, interpolation=cv2.INTER_CUBIC)
 
-img2 = cv2.imread('images/nutmeg.jpg', cv2.IMREAD_GRAYSCALE)
-img2 = cv2.resize(img2, (400, 400), interpolation=cv2.INTER_CUBIC)
+img2 = cv2.imread(img2Name, cv2.IMREAD_GRAYSCALE)
+img2 = cv2.resize(img2, imgResizeSize, interpolation=cv2.INTER_CUBIC)
 
 # initialize needed variables and windows
 rows, cols = img2.shape
@@ -111,19 +123,20 @@ resetImg2 = img2.copy()
 resetImg1 = img.copy()
 
 hybridImg = np.zeros(img.shape, np.uint8)
-cv2.imshow('hybrid', hybridImg)
+cv2.imshow(titleHybrid, hybridImg)
 
 warpedSecondImg = np.zeros(img2.shape, np.uint8)
-cv2.imshow('Original1', img)
-cv2.setMouseCallback('Original1', clickSrc1)
-cv2.imshow('Original2', img2)
-cv2.setMouseCallback('Original2', clickScr2)
 
-scaleFactor = 100
+cv2.imshow(titleOrig1, img)
+cv2.setMouseCallback(titleOrig1, clickSrc1)
+cv2.imshow(titleOrig2, img2)
+cv2.setMouseCallback(titleOrig2, clickScr2)
+
+scaleFactorSlider = 100
 slider_ksize_high = cv2.createTrackbar(
-    "ksize_high_freq", 'hybrid', ksize_imghigh, scaleFactor, sliderCallBack)
+    dragbarnamehigh, titleHybrid, ksize_imghigh, scaleFactorSlider, sliderCallBack)
 slider_ksize_low = cv2.createTrackbar(
-    "ksize_low_freq", 'hybrid', ksize_imglow, scaleFactor, sliderCallBack)
+    dragbarnamelow, titleHybrid, ksize_imglow, scaleFactorSlider, sliderCallBack)
 
 # keep looping until the 'q' key is pressed
 computationDone = False
@@ -135,14 +148,15 @@ while True:
         print('\nAffine transformation:\n', '\n'.join(
             ['\t'.join(['%03.3f' % cell for cell in row]) for row in T_affine]))
         warpedSecondImg = cv2.warpAffine(resetImg2, T_affine, (cols, rows))
+        warpedSecondImg = resetImg2
         computationDone = True
-        cv2.imshow('Warped2Img', warpedSecondImg)
+        cv2.imshow(titleWarped, warpedSecondImg)
         lowimg, highImg = createLowAndHighFrequencyImg(
             resetImg1, warpedSecondImg, (ksize_imglow, ksize_imglow),
             (ksize_imghigh, ksize_imghigh))
-        cv2.imshow('high', highImg)
-        hybridImg = lowimg+highImg
-        cv2.imshow('hybrid', hybridImg)
+        cv2.imshow(titleHighFreq, highImg)
+        hybridImg = cv2.add(lowimg, highImg)
+        cv2.imshow(titleHybrid, hybridImg)
 
     key = cv2.waitKey(1) & 0xFF
     # if the 'r' key is pressed, reset the transformation
@@ -153,9 +167,9 @@ while True:
         refPtSrc1 = []
         refPtSrc2 = []
         computationDone = False
-        cv2.imshow('Original1', img)
-        cv2.imshow('Original2', img2)
-        cv2.imshow('Warped2Img', warpedSecondImg)
+        cv2.imshow(titleOrig1, img)
+        cv2.imshow(titleOrig2, img2)
+        cv2.imshow(titleWarped, warpedSecondImg)
     # if the 'q' key is pressed, break from the loop
     elif key == ord("q"):
         break
