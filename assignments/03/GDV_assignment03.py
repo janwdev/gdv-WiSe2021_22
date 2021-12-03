@@ -14,16 +14,17 @@ https://www.kellyyangfan.com/hybridimage
 import cv2
 import numpy as np
 
+# Define variables
 img1Name = 'images/happy.jpg'
 img2Name = 'images/sad.jpg'
 imgResizeSize = (400, 400)
-
+# Arrays for the clicked part in the picture with coordinates
 refPtSrc1 = []
 refPtSrc2 = []
-
+# Kernel sizes for rendered the high and low frequency pictures
 ksize_imglow = 21
 ksize_imghigh = 31
-
+# Set titles for pictures and the sliders
 titleOrig1 = "Original1"
 titleOrig2 = "Original2"
 titleHybrid = "hybrid"
@@ -31,6 +32,8 @@ titleWarped = "Warped2Img"
 titleHighFreq = "high"
 dragbarnamehigh = "ksize_high_freq"
 dragbarnamelow = "ksize_low_freq"
+
+# Click function to select three points in the first image
 
 
 def clickSrc1(event, x, y, flags, param):
@@ -47,6 +50,8 @@ def clickSrc1(event, x, y, flags, param):
         cv2.circle(img, refPtSrc1[pos], 4, (0, 255, 0), 2)
         cv2.imshow(titleOrig1, img)
 
+# Click function to select three points in the second image
+
 
 def clickScr2(event, x, y, flags, param):
     # grab references to the global variables
@@ -62,9 +67,13 @@ def clickScr2(event, x, y, flags, param):
         cv2.circle(img2, refPtSrc2[pos], 4, (0, 255, 0), 2)
         cv2.imshow(titleOrig2, img2)
 
+# Function to create a High and a Low Frequency Picture
+
 
 def createLowAndHighFrequencyImg(imgLow, imgHigh, ksizelow, ksizehigh):
+    # Low image gets created with the gaussian blur
     lowFrequencyImg = cv2.GaussianBlur(imgLow, ksizelow, cv2.BORDER_DEFAULT)
+    # High frequency image gets created by subtracting the original image and the low frequency image
     highFrequencyimg = cv2.subtract(imgHigh, cv2.GaussianBlur(
         imgHigh, ksizehigh, sigmaX=0, borderType=cv2.BORDER_DEFAULT))
     return lowFrequencyImg, highFrequencyimg
@@ -89,9 +98,12 @@ def getFrequencies(image):
     # Return the resulting image (as well as the magnitude and phase for the inverse)
     return spec, mag, phase
 
+# Function to set sliders values for the warped picture and get the sliders position
+
 
 def sliderCallBack(x):
     '''callback function for the sliders'''
+    # Import global variables
     global computationDone
     global ksize_imghigh
     global ksize_imglow
@@ -99,18 +111,18 @@ def sliderCallBack(x):
     # read slider positions
     position_high = cv2.getTrackbarPos(dragbarnamehigh, titleHybrid)
     position_low = cv2.getTrackbarPos(dragbarnamelow, titleHybrid)
-
+    # ?
     if(position_high % 2 != 1):
         position_high += 1
     if(position_low % 2 != 1):
         position_low += 1
-
+    # Set new kernel sizes with the position of the sliders
     ksize_imghigh = position_high
     ksize_imglow = position_low
     computationDone = False
 
 
-# Load image and resize for better display
+# Load image in a gray scale and resize for better display
 img = cv2.imread(img1Name, cv2.IMREAD_GRAYSCALE)
 img = cv2.resize(img, imgResizeSize, interpolation=cv2.INTER_CUBIC)
 
@@ -127,11 +139,13 @@ cv2.imshow(titleHybrid, hybridImg)
 
 warpedSecondImg = np.zeros(img2.shape, np.uint8)
 
+# Shows the two original pictures & calls the click function to select three points
 cv2.imshow(titleOrig1, img)
 cv2.setMouseCallback(titleOrig1, clickSrc1)
 cv2.imshow(titleOrig2, img2)
 cv2.setMouseCallback(titleOrig2, clickScr2)
 
+# creates the sliders
 scaleFactorSlider = 100
 slider_ksize_high = cv2.createTrackbar(
     dragbarnamehigh, titleHybrid, ksize_imghigh, scaleFactorSlider, sliderCallBack)
@@ -150,12 +164,17 @@ while True:
         warpedSecondImg = cv2.warpAffine(resetImg2, T_affine, (cols, rows))
         warpedSecondImg = resetImg2
         computationDone = True
+        # Shows the warped image
         cv2.imshow(titleWarped, warpedSecondImg)
+        # Creates low and high frequency images
         lowimg, highImg = createLowAndHighFrequencyImg(
             resetImg1, warpedSecondImg, (ksize_imglow, ksize_imglow),
             (ksize_imghigh, ksize_imghigh))
+        # Shows high frequency image
         cv2.imshow(titleHighFreq, highImg)
+        # Creates hybrid image out of the low and high frequency image
         hybridImg = cv2.add(lowimg, highImg)
+        # Shows hybrid image
         cv2.imshow(titleHybrid, hybridImg)
 
     key = cv2.waitKey(1) & 0xFF

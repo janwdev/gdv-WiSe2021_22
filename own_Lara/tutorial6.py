@@ -31,7 +31,7 @@ font_size_smaller = .6
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 
-# TODO: define  RGB colors as variables
+# define  RGB colors as variables
 blue_rgb =(0,0,255)
 darkerblue_rgb = (0,0,150)
 green_rgb = (0,255,0)
