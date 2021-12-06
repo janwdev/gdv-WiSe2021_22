@@ -50,7 +50,11 @@ OpenCV uses NumPy ndarrays as the common format for data exchange. It can create
 ## Python style guide
 All these tutorials are written according to the [PEP8 Python Code Style Guide](https://www.python.org/dev/peps/pep-0008/). This is realized using the Python tools [pycodestyle (pep8)](https://code.visualstudio.com/docs/python/linting#_pycodestyle-pep8) and [autopep8](https://pypi.org/project/autopep8/).
 
-## Other tutorials
+## Other learning sources for OpenCV
+- [LearnOpenCV](https://learnopencv.com/) is a website that hosts some complete courses in Computer Vision and also some very good and [introductive tutorials](https://learnopencv.com/getting-started-with-opencv/).
+
+
+## Other video tutorials
 - [Tech with Tim: OpenCV Python Tutorials](https://www.youtube.com/watch?v=qCR2Weh64h4&list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn)
 - [freeCodeCamp.org -OpenCV Course - Full Tutorial with Python](https://www.youtube.com/watch?v=oXlwWbU8l2o) (not yet watched)
 
