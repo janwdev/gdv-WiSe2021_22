@@ -33,7 +33,7 @@ titleHighFreq = "high"
 dragbarnamehigh = "ksize_high_freq"
 dragbarnamelow = "ksize_low_freq"
 
-# Click function to select three points in the first image
+''' Click function to select three points in the first image '''
 
 
 def clickSrc1(event, x, y, flags, param):
@@ -50,7 +50,8 @@ def clickSrc1(event, x, y, flags, param):
         cv2.circle(img, refPtSrc1[pos], 4, (0, 255, 0), 2)
         cv2.imshow(titleOrig1, img)
 
-# Click function to select three points in the second image
+
+''' Click function to select three points in the second image '''
 
 
 def clickScr2(event, x, y, flags, param):
@@ -67,7 +68,8 @@ def clickScr2(event, x, y, flags, param):
         cv2.circle(img2, refPtSrc2[pos], 4, (0, 255, 0), 2)
         cv2.imshow(titleOrig2, img2)
 
-# Function to create a High and a Low Frequency Picture
+
+''' Function to create a High and a Low Frequency Picture'''
 
 
 def createLowAndHighFrequencyImg(imgLow, imgHigh, ksizelow, ksizehigh):
@@ -79,30 +81,10 @@ def createLowAndHighFrequencyImg(imgLow, imgHigh, ksizelow, ksizehigh):
     return lowFrequencyImg, highFrequencyimg
 
 
-def getFrequencies(image):
-    """ Compute spectral image with a DFT
-    """
-    # convert image to floats and do dft saving as complex output
-    dft = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
-
-    # apply shift of origin from upper left corner to center of image
-    dft_shift = np.fft.fftshift(dft)
-
-    # extract magnitude and phase images
-    mag, phase = cv2.cartToPolar(dft_shift[:, :, 0], dft_shift[:, :, 1])
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(mag)
-    print(min_val, max_val, min_loc, max_loc)
-    # get spectrum for viewing only
-    spec = ((1/20) * np.log(mag))
-
-    # Return the resulting image (as well as the magnitude and phase for the inverse)
-    return spec, mag, phase
-
-# Function to set sliders values for the warped picture and get the sliders position
+''' Function to set sliders values for the warped picture and get the sliders position '''
 
 
 def sliderCallBack(x):
-    '''callback function for the sliders'''
     # Import global variables
     global computationDone
     global ksize_imghigh
@@ -111,7 +93,7 @@ def sliderCallBack(x):
     # read slider positions
     position_high = cv2.getTrackbarPos(dragbarnamehigh, titleHybrid)
     position_low = cv2.getTrackbarPos(dragbarnamelow, titleHybrid)
-    # ?
+    # make kSize odd (because computation method)
     if(position_high % 2 != 1):
         position_high += 1
     if(position_low % 2 != 1):
