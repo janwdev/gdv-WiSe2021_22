@@ -50,7 +50,11 @@ OpenCV uses NumPy ndarrays as the common format for data exchange. It can create
 ## Python style guide
 All these tutorials are written according to the [PEP8 Python Code Style Guide](https://www.python.org/dev/peps/pep-0008/). This is realized using the Python tools [pycodestyle (pep8)](https://code.visualstudio.com/docs/python/linting#_pycodestyle-pep8) and [autopep8](https://pypi.org/project/autopep8/).
 
-## Other tutorials
+## Other learning sources for OpenCV
+- [LearnOpenCV](https://learnopencv.com/) is a website that hosts some complete courses in Computer Vision and also some very good and [introductive tutorials](https://learnopencv.com/getting-started-with-opencv/).
+
+
+## Other video tutorials
 - [Tech with Tim: OpenCV Python Tutorials](https://www.youtube.com/watch?v=qCR2Weh64h4&list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn)
 - [freeCodeCamp.org -OpenCV Course - Full Tutorial with Python](https://www.youtube.com/watch?v=oXlwWbU8l2o) (not yet watched)
 
@@ -133,5 +137,15 @@ Compute the edges of an image with the Canny edge detection. Adjust the paramete
 Compute the features of an image with the Harris corner detection. Adjust the parameters using sliders.
 - [empty code](./GDV_tutorial_15_empty.py)
 - [complete code](./GDV_tutorial_15.py)
+
+## Tutorial #16
+Compute the Harris corner response image and detect isolated corners with non-maximum suppression.
+- [empty code](./GDV_tutorial_16_empty.py)
+- [complete code](./GDV_tutorial_16.py)
+
+## Tutorial #17
+A demonstration of the OpenCV Simple Blob Detector. Adjust the parameters using sliders.
+- [empty code](./GDV_tutorial_17_empty.py)
+- [complete code](./GDV_tutorial_17.py)
 
 

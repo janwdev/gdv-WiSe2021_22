@@ -2,6 +2,7 @@
 import numpy as np
 import cv2
 
+
 # function to detect and draw the corners
 def drawFeatures(corners):
     # drawing helper variables
