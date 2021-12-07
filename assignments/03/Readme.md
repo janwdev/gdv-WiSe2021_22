@@ -10,4 +10,4 @@ Zuerst werden benötigte Module importiert und Variablen initialisiert. Dann fol
  \
 Es werden die Bilder geladen, angezeigt und weitere Variablen für die Oberfläche initialisiert. \
  \
-In einer Schleife wird nun geprüft, ob auf den Ursprungsbildern jeweils 3 Punkte, welche auf den Bildern übereinandergelegt werden sollen, geklickt wurden. Ist das der Fall, werden die Bilder entsprechend übereinandergelegt und ein Hybridbild erzeugt, welches mit verschiedenen Reglern weiter angepasst werden kann. Zwischenschritte sind hierbei die Erstellung eines Low- sowie High-Frequency Bildes. Diese werden ebenfalls angezeigt.
+In einer Schleife wird nun geprüft, ob auf den Ursprungsbildern jeweils 3 Punkte, welche auf den Bildern übereinandergelegt werden sollen, geklickt wurden. Ist das der Fall, werden die Bilder entsprechend übereinandergelegt und ein Hybridbild erzeugt, welches mit verschiedenen Reglern weiter angepasst werden kann. Damit der Effekt besser sichtbar wird, wird das Hybridbild zusätzlich in sehr klein und sehr groß angezeigt. Zwischenschritte sind hierbei die Erstellung eines Low- sowie High-Frequency Bildes. Alle Bilder werden angezeigt.

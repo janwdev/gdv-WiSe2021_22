@@ -159,6 +159,14 @@ while True:
         # Shows hybrid image
         cv2.imshow(titleHybrid, hybridImg)
 
+        hybrid_small = hybridImg.copy()
+        hybrid_small = cv2.resize(hybrid_small, (80, 80))
+        hybrid_big = hybridImg.copy()
+        hybrid_big = cv2.resize(hybrid_big, (800, 800))
+        cv2.imshow(titleHybrid + "small", hybrid_small)
+        cv2.imshow(titleHybrid + "big", hybrid_big)
+        # cv2.imshow("gegenüberstellung", np.concatenate((hybrid_small, hybrid_big), axis=1))
+
     key = cv2.waitKey(1) & 0xFF
     # if the 'r' key is pressed, reset the transformation
     if key == ord("r"):
