@@ -138,4 +138,14 @@ Compute the features of an image with the Harris corner detection. Adjust the pa
 - [empty code](./GDV_tutorial_15_empty.py)
 - [complete code](./GDV_tutorial_15.py)
 
+## Tutorial #16
+Compute the Harris corner response image and detect isolated corners with non-maximum suppression.
+- [empty code](./GDV_tutorial_16_empty.py)
+- [complete code](./GDV_tutorial_16.py)
+
+## Tutorial #17
+A demonstration of the OpenCV Simple Blob Detector. Adjust the parameters using sliders.
+- [empty code](./GDV_tutorial_17_empty.py)
+- [complete code](./GDV_tutorial_17.py)
+
 
