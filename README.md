@@ -148,4 +148,8 @@ A demonstration of the OpenCV Simple Blob Detector. Adjust the parameters using 
 - [empty code](./GDV_tutorial_17_empty.py)
 - [complete code](./GDV_tutorial_17.py)
 
+## Tutorial #18
+A demonstration of SIFT Detector and Descriptor for object recognition.
+- [empty code](./GDV_tutorial_18_empty.py)
+- [complete code](./GDV_tutorial_18.py)
 
