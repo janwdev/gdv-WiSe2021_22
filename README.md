@@ -153,3 +153,8 @@ A demonstration of SIFT Detector and Descriptor for object recognition.
 - [empty code](./GDV_tutorial_18_empty.py)
 - [complete code](./GDV_tutorial_18.py)
 
+## Tutorial #19
+A demonstration of object detection using a pre-trained deep neural network. Heavily based on https://learnopencv.com/deep-learning-with-opencvs-dnn-module-a-definitive-guide/
+- [empty code](./GDV_tutorial_19_empty.py)
+- [complete code](./GDV_tutorial_19.py)
+
