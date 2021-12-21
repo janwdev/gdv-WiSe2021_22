@@ -44,12 +44,12 @@ while cap.isOpened():
     if ret:
         image = frame
         image_height, image_width, _ = image.shape
-        # create blob from image using cv2.dnn.blobFromImage
-        blob = cv2.dnn.blobFromImage()
+        # TODO: create blob from image using cv2.dnn.blobFromImage
+        blob = cv2.dnn.blobFromImage('your code here')
         # start time to calculate FPS
         start = time.time()
-        # TODO: set the blob as input
-        
+        # set the blob as input
+        net.setInput(blob)
         # TODO: the inference: compute the output by running a forward pass
         output = 'your code here'
         # end time after detection
