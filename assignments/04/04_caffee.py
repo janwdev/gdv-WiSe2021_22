@@ -78,7 +78,7 @@ while cap.isOpened():
                             cv2.LINE_AA, 0.45, (0, 0, 255), 2)
 
                 detected_faces = detected_faces+1
-            if(detected_faces == right_dec_lines[frame_count]):
+            if(detected_faces == int(right_dec_lines[frame_count])):
                 right_captured_result_frames = right_captured_result_frames+1
             # show the output frame
             cv2.imshow(window_name, frame)
