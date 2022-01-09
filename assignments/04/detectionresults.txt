@@ -1,3 +1,3 @@
 Detection Results: 
-5/12 are captured correctly. This means an amount of 41.66666666666667%
+0/294 are captured correctly. This means an amount of 0.0%
 This is only correct if you haven't quit the program by yourself!

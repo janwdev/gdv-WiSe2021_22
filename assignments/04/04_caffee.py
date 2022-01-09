@@ -13,7 +13,7 @@ net = cv2.dnn.readNetFromCaffe(
 
 # video stream initialization
 # TODO replace with Video from Faces (30 FPS, 30 Sec total 900 Frames)
-cap = cv2.VideoCapture('./videos/objects_UH.MOV')
+cap = cv2.VideoCapture('./videos/pexels-artem-podrez-6952256.mp4')
 # cap = cv2.VideoCapture(0)  # uncomment to use the webcam
 # get the video frames' width and height for proper saving of videos
 frame_width = int(cap.get(3))
@@ -30,6 +30,8 @@ right_dec_lines = [line.rstrip() for line in right_dec_lines]
 # total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 right_captured_result_frames = 0
 frame_count = 0
+
+test = open("assignments/04/results.txt", "w")
 
 
 do_write_video = False
@@ -80,6 +82,7 @@ while cap.isOpened():
                 detected_faces = detected_faces+1
             if(detected_faces == int(right_dec_lines[frame_count])):
                 right_captured_result_frames = right_captured_result_frames+1
+            test.write(str(detected_faces) + "\n")
             # show the output frame
             cv2.imshow(window_name, frame)
 
@@ -108,6 +111,9 @@ dec_result_file = open("assignments/04/detectionresults.txt", "r")
 dec_result_file_content = dec_result_file.read()
 print(dec_result_file_content)
 dec_result_file.close()
+
+test.flush()
+test.close()
 
 # stop capturing
 cv2.destroyAllWindows()
