@@ -1,3 +1,3 @@
 Detection Results: 
-0/294 are captured correctly. This means an amount of 0.0%
+812/919 are captured correctly. This means an amount of 88.35690968443961%
 This is only correct if you haven't quit the program by yourself!
