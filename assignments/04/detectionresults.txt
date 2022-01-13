@@ -1,3 +1,3 @@
 Detection Results: 
-816/902 are captured correctly. This means an amount of 90.46563192904657%
+813/903 are captured correctly. This means an amount of 90.03322259136213%
 This is only correct if you haven't quit the program by yourself!
