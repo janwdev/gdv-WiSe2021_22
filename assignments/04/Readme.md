@@ -13,3 +13,6 @@ Danach wird das Video geladen in welchem die Gesichter erkannt werden sollen. Di
 Um die erkannten Gesichter wird ein Rechteck mit Prozentanzahl der Wahrscheinlichkeit eines Gesichtes gezeichnet.
 \
 Wenn man will (Variable im Code auf True) kann man das Ergebnisvideo mit den Rechtecken um die Gesichter speichern.
+
+## Model
+In dem Programm wurde das Caffemodel verwendet. Caffe verarbeitet und speichert Daten in Blobs.
