@@ -15,4 +15,5 @@ Um die erkannten Gesichter wird ein Rechteck mit Prozentanzahl der Wahrscheinlic
 Wenn man will (Variable im Code auf True) kann man das Ergebnisvideo mit den Rechtecken um die Gesichter speichern.
 
 ## Model
-In dem Programm wurde das Caffemodel verwendet. Caffe verarbeitet und speichert Daten in Blobs.
+In dem Programm wurde das Caffemodel verwendet. Caffe ist ein gut zu verstehendes Modell, da es keinen harten Übergang zwischen dem Lernteil und dem Benutzungsteil hat. Mit einem bereits existierenden Caffe Modell kann deep learning gleich ausprobiert werden um den sich damit bekannt zu machen, ohne sich gleich auf die "learning phase" versteifen zu müssen. Außerdem ist Caffe so konzipiert das es auf Bild Verarbeitung spezialisiert ist.
+
