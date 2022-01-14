@@ -34,7 +34,7 @@ right_captured_result_frames = 0
 frame_count = 0
 
 # oportunity to save output video
-do_write_video = False
+do_write_video = True
 if do_write_video:
     out_video = cv2.VideoWriter('video_result.mp4', cv2.VideoWriter_fourcc(
         *'mp4v'), 30, (frame_width, frame_height))
